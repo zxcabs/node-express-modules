@@ -1,0 +1,23 @@
+{
+	"name": "modules",
+	"version": "0.0.1",
+	"author": {
+		"name": "Evgeny Reznichenko",
+		"email": "kusakyky@gmail.com"
+	},
+	"dependencies": {
+		"express": "3.2"
+	},
+	"devDependencies": {
+		"express": "*",
+		"jade": "*",
+		"mocha": "*",
+		"should": "*"
+	},
+	"main": "./lib/index.js",
+	"repository": "git://github.com/zxcabs/modules",
+    "scripts": {},
+	"engines": {
+		"node": "0.10"
+	}
+}

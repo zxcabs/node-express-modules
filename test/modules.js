@@ -125,5 +125,14 @@ describe('modules', function () {
 			common.haveProp(modul, 'controllers');
 			modul.controllers.should.lengthOf(2);
 		});
+
+		/**
+		 * Test for verbose true
+		 */
+		describe('verbose true', function () {
+			it('should be ok', function () {
+				modules(__dirname + '/simple/mod3', { verbose: true });
+			});
+		});
 	});
 });

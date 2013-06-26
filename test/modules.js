@@ -134,5 +134,26 @@ describe('modules', function () {
 				modules(__dirname + '/simple/mod3', { verbose: true });
 			});
 		});
+
+		/**
+		 * Test for locals
+		 */
+		describe('locals', function () {
+			var mdir = __dirname + '/simple/mod3',
+				c = require(mdir + '/config'),
+				mod = modules(mdir);
+
+			/**
+			 * Test for mod.app.locals
+			 */
+			describe('mod.app.locals', function () {
+				var locals = mod.app.locals;
+
+				common.haveProp(locals, 'self', c.locals.self);
+				common.haveProp(locals, 'pretty', c.locals.pretty);
+				common.haveProp(locals, 'compileDebug', c.locals.compileDebug);
+				common.haveProp(locals, 'foo', c.locals.foo);
+			});
+		});
 	});
 });

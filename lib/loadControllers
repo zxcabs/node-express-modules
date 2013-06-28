@@ -3,6 +3,7 @@ var fs = require('fs'),
 	lib = require('node-lib'),
 	isUndef = lib.is.Undef,
 	isArray = lib.is.Array,
+	merge = lib.util.merge,
 	express = require('express');
 
 module.exports = function loadControllers(mod, opt) {
@@ -38,6 +39,9 @@ module.exports = function loadControllers(mod, opt) {
 			},
 			method,
 			path;
+
+		//nheritance app.locals
+		merge(app.locals, mod.app.locals);
 
 		controllers.push(controller);
 

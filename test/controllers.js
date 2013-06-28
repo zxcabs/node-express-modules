@@ -91,5 +91,18 @@ describe('controllers', function () {
 				common.appConfigProp(app, 'view engine', 'jade');
 			});
 		});
+
+		/**
+		 * Test for inheritance value module.app.locals
+		 */
+		describe('inheritance value module.app.locals', function () {
+			var con = mod.controllers[0],
+				modLocals = mod.app.locals,
+				conLocals = con.app.locals;
+
+			for (var name in modLocals) {
+				common.haveProp(conLocals, name, modLocals[name]);
+			}
+		});
 	});
 });

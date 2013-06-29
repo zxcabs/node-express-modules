@@ -116,6 +116,24 @@ describe('modules', function () {
 		});
 
 		/**
+		 * Test for submodule
+		 */
+		describe('submodule', function () {
+			var mdir = __dirname + '/simple/mod3',
+				modul = modules(mdir);
+
+			common.haveProp(modul, 'submodules');
+			var submod = modul.submodules[0];
+
+			common.haveProp(submod, 'name', 'mod31');
+			common.haveProp(submod, 'dir', path.join(modul.dir, 'modules', 'mod31'));
+			common.haveProp(submod, 'isRoot', false);
+			common.haveProp(submod, 'root', modul);
+			common.haveProp(submod, 'parent', modul);
+		});
+
+
+		/**
 		 * Test for load controller
 		 */
 		describe('load controller', function () {
@@ -123,7 +141,9 @@ describe('modules', function () {
 				modul = modules(mdir);
 
 			common.haveProp(modul, 'controllers');
-			modul.controllers.should.lengthOf(2);
+			it('should have modul.controllers.length === 2', function () {
+				modul.controllers.should.lengthOf(2);
+			});
 		});
 
 		/**

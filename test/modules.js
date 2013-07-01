@@ -27,6 +27,7 @@ describe('modules', function () {
 				modul = modules(mdir);
 
 			common.haveProp(modul, 'name', 'mod1');
+			common.haveProp(modul, 'prefix', '');
 			common.haveProp(modul, 'dir', mdir);
 			common.haveProp(modul, 'app');
 			common.haveProp(modul, 'before', null);
@@ -69,6 +70,7 @@ describe('modules', function () {
 				c = require(mdir + '/config');
 
 			common.haveProp(modul, 'name', c.name);
+			common.haveProp(modul, 'prefix', c.prefix);
 			common.haveProp(modul, 'dir', mdir);
 			common.haveProp(modul, 'app');
 			common.havePropEql(modul, 'before', [c.before]);

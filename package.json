@@ -6,14 +6,16 @@
 		"email": "kusakyky@gmail.com"
 	},
 	"dependencies": {
-		"node-lib": "0.0.3"
+		"node-lib": "0.0.3",
+		"commander": "*"
 	},
 	"devDependencies": {
 		"express": "*",
 		"jade": "*",
 		"mocha": "*",
 		"should": "*",
-		"node-lib": "*"
+		"node-lib": "*",
+		"commander": "*"
 	},
 	"main": "./lib/index.js",
 	"repository": "git://github.com/zxcabs/node-express-modules",

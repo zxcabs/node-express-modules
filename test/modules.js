@@ -38,6 +38,7 @@ describe('modules', function () {
 			common.haveProp(modul, 'controllers', null);
 			common.haveProp(modul, 'submodules', null);
 			common.haveProp(modul, 'config');
+			common.haveProp(modul, 'locals');
 
 			/**
 			 * Test for module.config
@@ -58,6 +59,36 @@ describe('modules', function () {
 				var app = modul.app;
 				common.appConfigNotExist(app, ['trust proxy', 'json spaces', 'json replacer', 'view cache',
 					'strict routing', 'case sensitive routing']);
+			});
+
+			/**
+			 * Test for module.locals
+			 */
+			describe('module.locals', function () {
+			    var locals = modul.locals;
+				common.haveProp(locals, 'site');
+				common.haveProp(locals, 'path');
+
+				/**
+				 * Test for module.locals.site
+				 */
+				describe('module.locals.site', function () {
+				    var site = locals.site;
+					common.haveProp(site, 'title', modul.name);
+				});
+
+			});
+
+			/**
+			 * Test for module.app.locals
+			 */
+			describe('module.app.locals', function () {
+			    var modLocals = modul.locals,
+					appLocals = modul.app.locals;
+
+				for (var name in modLocals) {
+					common.haveProp(appLocals, name, modLocals[name]);
+				}
 			});
 		});
 
@@ -81,6 +112,7 @@ describe('modules', function () {
 			common.haveProp(modul, 'controllers', null);
 			common.haveProp(modul, 'submodules', null);
 			common.haveProp(modul, 'config');
+			common.haveProp(modul, 'locals');
 
 			/**
 			 * Test for module.config
@@ -114,6 +146,24 @@ describe('modules', function () {
 				common.appConfigProp(app, 'view cache', c.view_cache);
 				common.appConfigProp(app, 'strict routing', c.strict_routing);
 				common.appConfigProp(app, 'case sensitive routing', c.case_sensitive_routing);
+			});
+
+			/**
+			 * Test for module.locals
+			 */
+			describe('module.locals', function () {
+				var locals = modul.locals;
+				common.haveProp(locals, 'site');
+				common.haveProp(locals, 'path');
+
+				/**
+				 * Test for module.locals.site
+				 */
+				describe('module.locals.site', function () {
+					var site = locals.site;
+					common.haveProp(site, 'title', c.locals.site.title);
+				});
+
 			});
 		});
 

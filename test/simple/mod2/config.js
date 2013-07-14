@@ -7,6 +7,11 @@
 
 exports.name = 'supermod';
 exports.prefix = '/';
+exports.locals = {
+	site: {
+		title: 'Site Title'
+	}
+};
 exports.before = function noop(req, res, next) { next(); };
 exports.after = [function noop(req, res, next) { next(); }];
 exports.trust_proxy = true;

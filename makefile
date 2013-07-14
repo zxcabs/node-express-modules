@@ -5,4 +5,10 @@ test:
 			-r should \
 			-R spec
 
-.PHONY: test
+test-controllers:
+	@NODE_ENV=test $(MOCHA) test/controllers.js\
+			-r should \
+			-R spec
+
+
+.PHONY: test test-controllers

@@ -33,6 +33,7 @@ describe('controllers', function () {
 			common.haveProp(index, 'before', null);
 			common.haveProp(index, 'module', mod);
 			common.haveProp(index, 'config');
+			common.haveProp(index, 'locals');
 
 			/**
 			 * Test for controller.config
@@ -54,12 +55,60 @@ describe('controllers', function () {
 				common.appConfigProp(app, 'views', p.resolve(index.dir, 'views'));
 				common.appConfigProp(app, 'view engine', 'jade');
 			});
+
+			/**
+			 * Test for controller.locals
+			 */
+			describe('controller.locals', function () {
+			    var locals = index.locals,
+				    modLocals = mod.locals;
+
+				common.haveProp(locals, 'page');
+
+				/**
+				 * Test for page
+				 */
+				describe('page', function () {
+				    var page = locals.page;
+					common.haveProp(page, 'title', index.name);
+				});
+
+				//inherits module.locals
+				for (var name in modLocals) {
+					common.havePropEql(locals, name, modLocals[name]);
+				}
+			});
+
+			/**
+			 * Test for controller.app.locals
+			 */
+			describe('controller.app.locals', function () {
+			    var appLocals = index.app.locals,
+				    conLocals = index.locals;
+
+				for (var name in conLocals) {
+					common.haveProp(appLocals, name, conLocals[name]);
+				}
+			});
+
+			/**
+			 * Test for inheritance value module.app.locals
+			 */
+			describe('inheritance value module.app.locals', function () {
+				var con = mod.controllers[0],
+					modLocals = mod.locals,
+					conLocals = con.locals;
+
+				for (var name in modLocals) {
+					common.havePropEql(conLocals, name, modLocals[name]);
+				}
+			});
 		});
 
 		/**
-		 * Test for with default config
+		 * Test for with config
 		 */
-		describe('with default config', function () {
+		describe('with config', function () {
 			var news = mod.controllers[1],
 				c = require(news.dir);
 
@@ -90,19 +139,20 @@ describe('controllers', function () {
 				common.appConfigProp(app, 'views', p.resolve(news.dir, c.views));
 				common.appConfigProp(app, 'view engine', 'jade');
 			});
-		});
 
-		/**
-		 * Test for inheritance value module.app.locals
-		 */
-		describe('inheritance value module.app.locals', function () {
-			var con = mod.controllers[0],
-				modLocals = mod.app.locals,
-				conLocals = con.app.locals;
+			describe('controller.locals', function () {
+				var locals = news.locals;
 
-			for (var name in modLocals) {
-				common.haveProp(conLocals, name, modLocals[name]);
-			}
+				common.haveProp(locals, 'page');
+
+				/**
+				 * Test for page
+				 */
+				describe('page', function () {
+					var page = locals.page;
+					common.haveProp(page, 'title', c.locals.page.title);
+				});
+			});
 		});
 	});
 });
